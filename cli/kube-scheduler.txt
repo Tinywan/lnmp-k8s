@@ -1,5 +1,3 @@
-I0827 09:20:05.068852   33251 registry.go:173] Registering SelectorSpread plugin
-I0827 09:20:05.068910   33251 registry.go:173] Registering SelectorSpread plugin
 The Kubernetes scheduler is a control plane process which assigns
 Pods to Nodes. The scheduler determines which Nodes are valid placements for
 each Pod in the scheduling queue according to constraints and available
@@ -32,8 +30,8 @@ Secure serving flags:
       --permit-port-sharing                    If true, SO_REUSEPORT will be used when binding the port, which allows more than one instance to bind on the same address and port. [default=false]
       --secure-port int                        The port on which to serve HTTPS with authentication and authorization. If 0, don't serve HTTPS at all. (default 10259)
       --tls-cert-file string                   File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and --tls-cert-file and --tls-private-key-file are not provided, a self-signed certificate and key are generated for the public address and saved to the directory specified by --cert-dir.
-      --tls-cipher-suites strings              Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be used.
-                                               Preferred values: TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384.
+      --tls-cipher-suites strings              Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be used. 
+                                               Preferred values: TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305, TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305, TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384. 
                                                Insecure values: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_RC4_128_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_RC4_128_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_RC4_128_SHA.
       --tls-min-version string                 Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
       --tls-private-key-file string            File containing the default x509 private key matching --tls-cert-file.
@@ -87,7 +85,7 @@ Leader election flags:
       --leader-elect                             Start a leader election client and gain leadership before executing the main loop. Enable this when running replicated components for high availability. (default true)
       --leader-elect-lease-duration duration     The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 15s)
       --leader-elect-renew-deadline duration     The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 10s)
-      --leader-elect-resource-lock string        The type of resource object that is used for locking during leader election. Supported options are 'endpoints', 'configmaps', 'leases', 'endpointsleases' and 'configmapsleases'. (default "endpointsleases")
+      --leader-elect-resource-lock string        The type of resource object that is used for locking during leader election. Supported options are 'endpoints', 'configmaps', 'leases', 'endpointsleases' and 'configmapsleases'. (default "leases")
       --leader-elect-resource-name string        The name of resource object that is used for locking during leader election. (default "kube-scheduler")
       --leader-elect-resource-namespace string   The namespace of resource object that is used for locking during leader election. (default "kube-system")
       --leader-elect-retry-period duration       The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 2s)
@@ -127,8 +125,9 @@ Feature gate flags:
                                       CustomCPUCFSQuotaPeriod=true|false (ALPHA - default=false)
                                       DefaultPodTopologySpread=true|false (ALPHA - default=false)
                                       DevicePlugins=true|false (BETA - default=true)
-                                      DisableAcceleratorUsageMetrics=true|false (ALPHA - default=false)
+                                      DisableAcceleratorUsageMetrics=true|false (BETA - default=true)
                                       DynamicKubeletConfig=true|false (BETA - default=true)
+                                      EfficientWatchResumption=true|false (ALPHA - default=false)
                                       EndpointSlice=true|false (BETA - default=true)
                                       EndpointSliceProxying=true|false (BETA - default=true)
                                       EphemeralContainers=true|false (ALPHA - default=false)
@@ -153,22 +152,17 @@ Feature gate flags:
                                       ProcMountType=true|false (ALPHA - default=false)
                                       QOSReserved=true|false (ALPHA - default=false)
                                       RemainingItemCount=true|false (BETA - default=true)
-                                      RemoveSelfLink=true|false (ALPHA - default=false)
+                                      RemoveSelfLink=true|false (BETA - default=true)
                                       RotateKubeletServerCertificate=true|false (BETA - default=true)
                                       RunAsGroup=true|false (BETA - default=true)
                                       RuntimeClass=true|false (BETA - default=true)
-                                      SCTPSupport=true|false (BETA - default=true)
-                                      SelectorIndex=true|false (BETA - default=true)
                                       ServerSideApply=true|false (BETA - default=true)
-                                      ServiceAccountIssuerDiscovery=true|false (ALPHA - default=false)
+                                      ServiceAccountIssuerDiscovery=true|false (BETA - default=true)
                                       ServiceAppProtocol=true|false (BETA - default=true)
                                       ServiceNodeExclusion=true|false (BETA - default=true)
                                       ServiceTopology=true|false (ALPHA - default=false)
-                                      SetHostnameAsFQDN=true|false (ALPHA - default=false)
-                                      StartupProbe=true|false (BETA - default=true)
+                                      SetHostnameAsFQDN=true|false (BETA - default=true)
                                       StorageVersionHash=true|false (BETA - default=true)
-                                      SupportNodePidsLimit=true|false (BETA - default=true)
-                                      SupportPodPidsLimit=true|false (BETA - default=true)
                                       Sysctls=true|false (BETA - default=true)
                                       TTLAfterFinished=true|false (ALPHA - default=false)
                                       TokenRequest=true|false (BETA - default=true)
@@ -178,7 +172,7 @@ Feature gate flags:
                                       VolumeSnapshotDataSource=true|false (BETA - default=true)
                                       WarningHeaders=true|false (BETA - default=true)
                                       WinDSR=true|false (ALPHA - default=false)
-                                      WinOverlay=true|false (ALPHA - default=false)
+                                      WinOverlay=true|false (BETA - default=true)
                                       WindowsEndpointSliceProxying=true|false (ALPHA - default=false)
 
 Metrics flags:
@@ -187,7 +181,7 @@ Metrics flags:
 
 Logs flags:
 
-      --logging-format string   Sets the log format. Permitted formats: "text", "json".
+      --logging-format string   Sets the log format. Permitted formats: "json", "text".
                                 Non-default formats don't honor these flags: --add_dir_header, --alsologtostderr, --log_backtrace_at, --log_dir, --log_file, --log_file_max_size, --logtostderr, --skip_headers, --skip_log_headers, --stderrthreshold, --vmodule, --log-flush-frequency.
                                 Non-default choices are currently alpha and subject to change without warning. (default "text")
 

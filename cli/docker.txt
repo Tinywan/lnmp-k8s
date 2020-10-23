@@ -17,13 +17,12 @@ Options:
   -v, --version            Print version information and quit
 
 Management Commands:
-  app*        Docker Application (Docker Inc., v0.8.0)
+  app*        Docker App (Docker Inc., v0.9.1-beta3)
   builder     Manage builds
-  buildx*     Build with BuildKit (Docker Inc., v0.3.1-tp-docker)
+  buildx*     Build with BuildKit (Docker Inc., v0.4.2-docker)
   config      Manage Docker configs
   container   Manage containers
   context     Manage contexts
-  engine      Manage the docker engine
   image       Manage images
   manifest    Manage Docker image manifests and manifest lists
   network     Manage networks
